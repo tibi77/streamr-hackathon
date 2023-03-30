@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Router, Switch } from "react-router-dom";
 import { Route, RouteProps } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 const useIsAuthenticated = () => {
   // TODO check if it is authenticated
@@ -23,6 +23,30 @@ const useCurrentUser = (isAuthenticated?: boolean) => {
       pic: "??"
     }
   }
+}
+const Login = () => {
+  return <>
+    Login
+
+  </>
+}
+const Dashboard = () => {
+  return <>
+    Dashboard
+
+  </>
+}
+const Upload = () => {
+  return <>
+    Upload
+
+  </>
+}
+const Profile = () => {
+  return <>
+    Profile
+
+  </>
 }
 function PrivateRoute({
   component: Component,
@@ -47,18 +71,22 @@ function PrivateRoute({
     <Route
       {...rest}
       render={(props) => {
-        if (renderReady)
+        if (renderReady && Component)
           return <Component {...props} />
 
       }}
     />)
 }
+const history = createBrowserHistory();
 
-function App({ history }: { history: History }) {
+function App() {
   return (
     <Router history={history}>
       <Switch>
-        <PrivateRoute exact path="/login" component={Login} />
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute exact path="/upload" component={Upload} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/profile" component={Profile} />
       </Switch>
     </Router>
   );
