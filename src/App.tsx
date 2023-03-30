@@ -9,7 +9,7 @@ const useIsAuthenticated = () => {
   return true
 }
 const useCurrentUser = (isAuthenticated?: boolean) => {
-  // TODO get current user info]
+  // TODO get current user info
   if (!isAuthenticated)
     return {
       isLoading: true, data: {
